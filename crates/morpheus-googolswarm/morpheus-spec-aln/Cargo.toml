@@ -1,0 +1,10 @@
+[package]
+name = "morpheus-spec-aln"
+version.workspace = true
+edition.workspace = true
+description = "ALN-like specification parser and model for Morpheus governance surfaces."
+
+[dependencies]
+serde.workspace = true
+thiserror.workspace = true
+morpheus-core = { path = "../morpheus-core" }
