@@ -1,0 +1,9 @@
+[package]
+name = "morpheus-examples"
+version.workspace = true
+edition.workspace = true
+description = "Example binaries and ALN specs for Morpheus."
+
+[dependencies]
+anyhow.workspace = true
+morpheus-spec-aln = { path = "../morpheus-spec-aln" }
