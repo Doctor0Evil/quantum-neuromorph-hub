@@ -1,0 +1,15 @@
+[package]
+name = "morpheus-orchestrator"
+version.workspace = true
+edition.workspace = true
+description = "CLI and service adapter to expose Morpheus governance profiles to system interpreters and workflow orchestrators (GitHub Actions, etc.)."
+
+[dependencies]
+clap.workspace = true
+anyhow.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+morpheus-core = { path = "../morpheus-core" }
+morpheus-spec-aln = { path = "../morpheus-spec-aln" }
