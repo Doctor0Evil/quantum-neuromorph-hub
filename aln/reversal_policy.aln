@@ -1,0 +1,7 @@
+SECTION,REVERSAL-POLICY
+  ROW,rev,capability,flag,allowneuromorphreversal,false,bool,nonwaivable,Monotone evolution default for rights protection
+  ROW,rev,capability,flag,explicitreversalorder,,bool,input,Owner-signed order required
+  ROW,rev,capability,flag,nosaferalternative,,bool,derived,All mitigations exhausted and RoH persists high
+  ROW,rev,capability,condition,canrevertcapability,
+      neuromorphgodsatisfied AND explicitreversalorder true AND nosaferalternative true,
+      string,readonly,Reversal gate for emergency only
