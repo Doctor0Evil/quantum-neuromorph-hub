@@ -20,7 +20,7 @@ enum Commands {
     EnforceAction {
         /// Action name (e.g., upgrade, rollback)
         action: String,
-    },
+    }
 }
 
 fn main() {
@@ -53,6 +53,6 @@ fn main() {
                 eprintln!("Action '{action}' is not allowed: {e}");
                 std::process::exit(1);
             }
-        },
+        }
     }
 }
