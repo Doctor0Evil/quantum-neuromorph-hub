@@ -1,0 +1,8 @@
+[workspace]
+members = [
+    "crates/core-contract",
+    "crates/orchestration",
+    "crates/cli-agent",
+]
+
+resolver = "2"
