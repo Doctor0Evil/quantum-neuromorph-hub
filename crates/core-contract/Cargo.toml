@@ -1,0 +1,9 @@
+[package]
+name = "core-contract"
+version = "0.1.0"
+edition = "2021"
+description = "Sovereign neuromorph contract and rights primitives."
+license = "MIT"
+repository = "https://github.com/your-user/morpheus-neuromorph"
+
+[dependencies]
