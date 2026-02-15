@@ -1,0 +1,27 @@
+[workspace]
+members = [
+    "morpheus-core",
+    "morpheus-orchestrator",
+    "morpheus-spec-aln",
+    "morpheus-examples",
+]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+version = "0.1.0"
+authors = ["Bostrom <bostrom18sd2ujv24ual9c9pshtxys6j8knh6xaead9ye7>"]
+license = "MIT"
+description = "Morpheus neuromorph-governance workspace: sovereign, non-exclusive neuromorphic rights and capability governance with ALN-specs, orchestrator integration, and GitHub workflows."
+
+[workspace.dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "1.0"
+toml = "0.8"
+clap = { version = "4.5", features = ["derive"] }
+anyhow = "1.0"
+uuid = { version = "1.8", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["fmt", "env-filter"] }
