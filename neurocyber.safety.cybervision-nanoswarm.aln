@@ -12,3 +12,13 @@ subject:
     allowsCoerciveBCI: false
   innerDomain:
     neurorights_polytope: "P_inner (cognitive liberty, mental privacy, mental integrity, continuity); no device, swarm, or copilot may read, infer, or modulate inner state."
+
+text.outerDomain:
+  biophysical_indices:
+    BCI: ...
+    RoH: ...
+    ROD: ...
+  invariants:
+    - "BCI_after ≤ BCI_before (learning and updates cannot increase risk)."
+    - "RoH_after ≤ RoH_before; ROD_after ≤ ROD_before."
+    - "If BCI ≥ 0.3 or RoH ≥ 0.3 or ROD ≥ 0.3, all invasive or high-impact actuation enters LOCKDOWN state."
