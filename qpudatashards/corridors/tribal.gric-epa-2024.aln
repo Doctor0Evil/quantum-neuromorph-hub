@@ -1,0 +1,28 @@
+version 1.0
+schema viva.corridor.profile
+
+corridor
+  id          tribal.gric-epa-2024
+  tier        Tribal
+  strength    HardVeto
+  version     2024.1
+  description "GRIC Environmental Protection Act 2024 backbone; FPIC + community veto over environmental monitoring and ecological actuation."
+
+fpic_ids
+  required             true
+  revocable            true
+  community_veto_scope env-monitoring, smart-infra, eco-actuation
+
+neurorights_hgo
+  inner_outer_enforced         true
+  neural_data_safety_only      true
+  requires_opt_out_channels    true
+  forbids_inner_for_access     true
+
+eco_guardrails
+  max_delta_pm25_ug_m3         0.0
+  max_delta_lead_ppb           0.0
+  max_delta_water_use_m3       0.0
+  max_delta_heat_index_c       0.0
+
+proofhex 0xCORRIDOR-GRIC-EPA-2024
