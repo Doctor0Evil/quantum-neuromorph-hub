@@ -1,0 +1,58 @@
+[package]
+name = "morpheus-client"
+version = "0.1.0"
+edition = "2021"
+authors = ["Neuromorphic Evolution Collective"]
+description = "Sovereign neuromorphic evolution framework with EvolutionAuditRecords, pluggable policies, and RoH/BCI* monotonicity"
+license = "HIT-1.0"
+repository = "https://github.com/Doctor0Evil/Morpheus"
+
+[workspace]
+members = [".", "crates/aln-shards", "crates/corridor-core", "crates/guards"]
+
+[dependencies]
+# Core async & networking
+tokio = { version = "1.35", features = ["full"] }
+async-trait = "0.1"
+futures = "0.3"
+
+# Cryptography & DID
+ed25519-dalek = "2.1"
+sha2 = "0.10"
+digest = "0.10"
+hex = "0.4"
+uuid = { version = "1.6", features = ["v4", "serde"] }
+
+# Serialization & data structures
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+toml = "0.8"
+
+# Logging & tracing
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+
+# Error handling
+thiserror = "1.0"
+anyhow = "1.0"
+
+# Time & dates
+chrono = { version = "0.4", features = ["serde"] }
+
+# Numeric & math
+nalgebra = { version = "0.32", features = ["serde"] }
+ordered-float = "3.9"
+
+# Testing & validation
+proptest = "1.4"
+
+[dev-dependencies]
+criterion = "0.5"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+
+[profile.bench]
+inherits = "release"
