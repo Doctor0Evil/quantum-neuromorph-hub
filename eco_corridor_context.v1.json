@@ -1,0 +1,52 @@
+{
+  "type": "object",
+  "required": ["version", "corridorId", "ecoImpact", "fpicIdsState", "neurorightsCapsule"],
+  "properties": {
+    "version": { "type": "string", "enum": ["eco-corridor-context.v1"] },
+    "corridorId": { "type": "string" },      // DID-like, non-empty
+    "ecoImpact": {
+      "type": "object",
+      "required": ["soilHealth", "waterQuality", "microbiomeDiversity", "corridorResilience"],
+      "properties": {
+        "soilHealth": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "waterQuality": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "microbiomeDiversity": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "corridorResilience": { "type": "number", "minimum": 0.0, "maximum": 1.0 }
+      }
+    },
+    "fpicIdsState": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["issuerDid", "subjectCorridorId", "status", "issuedAt"],
+          "properties": {
+            "issuerDid": { "type": "string" },
+            "subjectCorridorId": { "type": "string" },
+            "status": { "type": "string", "enum": ["Granted", "Revoked", "Pending"] },
+            "issuedAt": { "type": "string", "format": "date-time" },
+            "revokedAt": { "type": ["string", "null"], "format": "date-time" }
+          }
+        }
+      ]
+    },
+    "neurorightsCapsule": {
+      "type": "object",
+      "required": ["flags"],
+      "properties": {
+        "flags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "ForbidFearPainCoercion",
+              "NoMentalManipulation",
+              "NoCovertInference"
+            ]
+          },
+          "minItems": 0
+        }
+      }
+    }
+  }
+}
