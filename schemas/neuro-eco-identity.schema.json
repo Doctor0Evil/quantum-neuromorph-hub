@@ -1,0 +1,39 @@
+{
+  "$id": "https://morpheus.aln/schemas/neuro-eco-identity.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NeuroEco Identity Manifest",
+  "type": "object",
+
+  "properties": {
+    "subject_did": {
+      "type": "string",
+      "description": "DID of the subject/host (e.g., bostrom18...)."
+    },
+    "host_id": {
+      "type": "string",
+      "description": "Local OrganicCPU / Morpheus host identifier."
+    },
+    "corridor_id": {
+      "type": "string",
+      "description": "EcoCorridorContext / corridor identifier."
+    },
+
+    "neurorights_profile": {
+      "$ref": "neurorights-policy.schema.json",
+      "description": "Inlined neurorights profile or reference."
+    },
+
+    "biomech_policy": {
+      "$ref": "biomech-integration-policy.schema.json",
+      "description": "Inlined biomech policy or reference."
+    }
+  },
+
+  "required": [
+    "subject_did",
+    "host_id",
+    "corridor_id",
+    "neurorights_profile",
+    "biomech_policy"
+  ]
+}
