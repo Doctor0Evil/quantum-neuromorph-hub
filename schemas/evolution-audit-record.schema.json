@@ -1,5 +1,9 @@
 {
+  "$id": "https://morpheus.aln/schemas/evolution-audit-record.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Evolution Audit Record",
   "type": "object",
+
   "properties": {
     "record_id": { "type": "string" },
     "timestamp": { "type": "string", "format": "date-time" },
@@ -7,26 +11,51 @@
     "subject_did": { "type": "string" },
     "host_id": { "type": "string" },
 
+    "origin_module_id": {
+      "type": "string",
+      "description": "Module that proposed the action/evolution."
+    },
+
     "biocontrol_origin": {
       "type": "string",
       "enum": ["host_local_only"],
+      "description": "Origin of biophysical control for this record.",
       "default": "host_local_only"
     },
 
-    "origin_module_id": { "type": "string" },
-
     "noRemoteControlOverBioState": {
       "type": "boolean",
+      "description": "Snapshot of neurorights constraint in effect.",
       "default": true
+    },
+
+    "bio_state_before": { "type": "object" },
+    "bio_state_after": { "type": "object" },
+
+    "eco_state_before": { "type": "object" },
+    "eco_state_after": { "type": "object" },
+
+    "guard_verdicts": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+
+    "final_verdict": {
+      "type": "string",
+      "enum": ["AllowFullAction", "DegradePrecision", "PauseAndRest", "Deny"]
     }
   },
+
   "required": [
     "record_id",
     "timestamp",
     "subject_did",
     "host_id",
-    "biocontrol_origin",
     "origin_module_id",
-    "noRemoteControlOverBioState"
+    "biocontrol_origin",
+    "noRemoteControlOverBioState",
+    "bio_state_before",
+    "bio_state_after",
+    "final_verdict"
   ]
 }
