@@ -1,0 +1,27 @@
+{
+  "$schema": "https://morpheus.aln/schemas/decoder-module.schema.json",
+
+  "decoderId": "decoder:erp:p300-consent:v1",
+  "version": "1.0.0",
+  "decoderKind": "erp_averaging",
+
+  "host_local_only": true,
+  "outer_domain_only": true,
+  "noRemoteControlOverBioState": true,
+  "biostate_control_origin": "host_local_only",
+
+  "inputs": {
+    "raw_eeg": true,
+    "bystate_outer_indices": ["BCI", "RoH"]
+  },
+
+  "outputs": {
+    "outer_biostate_fields": ["erp_p300_confidence"],
+    "action_predicates": ["ERP_Approve", "ERP_Deny"]
+  },
+
+  "evidence_bundles": [
+    "evidence:erp:p300-consent:v1",
+    "evidence:fpic:structured-query-response:v1"
+  ]
+}
