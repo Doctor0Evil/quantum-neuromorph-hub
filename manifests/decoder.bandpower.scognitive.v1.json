@@ -1,0 +1,27 @@
+{
+  "$schema": "https://morpheus.aln/schemas/decoder-module.schema.json",
+
+  "decoderId": "decoder:bandpower:scognitive:v1",
+  "version": "1.0.0",
+  "decoderKind": "bandpower",
+
+  "host_local_only": true,
+  "outer_domain_only": true,
+  "noRemoteControlOverBioState": true,
+  "biostate_control_origin": "host_local_only",
+
+  "inputs": {
+    "raw_eeg": true,
+    "bystate_outer_indices": []
+  },
+
+  "outputs": {
+    "outer_biostate_fields": ["Scognitive"],
+    "action_predicates": ["AllowFullAction", "DegradePrecision", "PauseAndRest"]
+  },
+
+  "evidence_bundles": [
+    "evidence:bandpower:workload:meta:v1",
+    "evidence:bcimodel:0.3-ceiling:v1"
+  ]
+}
