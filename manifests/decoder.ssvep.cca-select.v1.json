@@ -1,0 +1,30 @@
+{
+  "$schema": "https://morpheus.aln/schemas/decoder-module.schema.json",
+
+  "decoderId": "decoder:ssvep:cca-select:v1",
+  "version": "1.0.0",
+  "decoderKind": "ssvep_cca",
+
+  "host_local_only": true,
+  "outer_domain_only": true,
+  "noRemoteControlOverBioState": true,
+  "biostate_control_origin": "host_local_only",
+
+  "inputs": {
+    "raw_eeg": true,
+    "bystate_outer_indices": ["BCI"]
+  },
+
+  "outputs": {
+    "outer_biostate_fields": ["ssvep_target_index", "ssvep_confidence"],
+    "action_predicates": [
+      "SSVEP_SelectTarget",
+      "SSVEP_NoDecision"
+    ]
+  },
+
+  "evidence_bundles": [
+    "evidence:ssvep:cca:high-itr:v1",
+    "evidence:ssvep:visual-fatigue-bounds:v1"
+  ]
+}
