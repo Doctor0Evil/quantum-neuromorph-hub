@@ -1,0 +1,141 @@
+{
+  "$id": "https://morpheus.aln/schemas/decoder-module.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Decoder Module Descriptor",
+  "type": "object",
+
+  "properties": {
+    "decoderId": {
+      "type": "string",
+      "description": "Logical identifier for this decoder module."
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version string, e.g., 1.0.0."
+    },
+
+    "decoderKind": {
+      "type": "string",
+      "enum": ["bandpower", "erp_averaging", "ssvep_cca"],
+      "description": "Type of decoding algorithm."
+    },
+
+    "host_local_only": {
+      "type": "boolean",
+      "description": "If true, decoder may only run on the local host enclave.",
+      "default": true
+    },
+
+    "outer_domain_only": {
+      "type": "boolean",
+      "description": "If true, decoder outputs may only be used as outer-domain observables (BioState/ActionProposal fields), never as governance or sanction inputs.",
+      "default": true
+    },
+
+    "noRemoteControlOverBioState": {
+      "type": "boolean",
+      "description": "If true, decoder outputs may not be used to directly change BioState/BCI/RoH from remote or off-chain origins.",
+      "default": true
+    },
+
+    "biostate_control_origin": {
+      "type": "string",
+      "enum": ["host_local_only"],
+      "description": "Origin of any biostate-related effects; restricted to host_local_only for this schema.",
+      "default": "host_local_only"
+    },
+
+    "inputs": {
+      "type": "object",
+      "description": "Declared inputs; raw EEG must be host-local only.",
+      "properties": {
+        "raw_eeg": {
+          "type": "boolean",
+          "description": "If true, decoder consumes raw EEG locally inside enclave.",
+          "default": true
+        },
+        "bystate_outer_indices": {
+          "type": "array",
+          "description": "Optional outer-domain indices (e.g., BCI, HRV) used as context.",
+          "items": { "type": "string" },
+          "default": []
+        }
+      },
+      "required": ["raw_eeg"]
+    },
+
+    "outputs": {
+      "type": "object",
+      "description": "Declared outputs; all must be outer-domain.",
+      "properties": {
+        "outer_biostate_fields": {
+          "type": "array",
+          "description": "Names of BioState fields this decoder writes (e.g., Scognitive, erp_confidence, ssvep_intent_index).",
+          "items": { "type": "string" },
+          "default": []
+        },
+        "action_predicates": {
+          "type": "array",
+          "description": "Discrete predicates this decoder can propose (e.g., PauseAndRest, ApproveAssistive).",
+          "items": { "type": "string" },
+          "default": []
+        }
+      },
+      "required": ["outer_biostate_fields", "action_predicates"]
+    },
+
+    "evidence_bundles": {
+      "type": "array",
+      "description": "EvidenceBundle IDs that justify this decoder's safety envelopes and parameter ranges.",
+      "items": { "type": "string" },
+      "default": []
+    }
+  },
+
+  "required": [
+    "decoderId",
+    "version",
+    "decoderKind",
+    "host_local_only",
+    "outer_domain_only",
+    "noRemoteControlOverBioState",
+    "biostate_control_origin",
+    "inputs",
+    "outputs"
+  ],
+
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "host_local_only": { "const": true }
+        }
+      },
+      "then": {
+        "properties": {
+          "biostate_control_origin": { "const": "host_local_only" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outer_domain_only": { "const": true }
+        }
+      },
+      "then": {
+        "description": "Decoder outputs must only be used as outer-domain indices and predicates; governance/sanctions must ignore them."
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "noRemoteControlOverBioState": { "const": true }
+        }
+      },
+      "then": {
+        "description": "Decoder MAY NOT be used to drive remote or off-chain biophysical actuation."
+      }
+    }
+  ]
+}
