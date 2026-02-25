@@ -3,31 +3,38 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Neurorights Policy Profile",
   "type": "object",
+
   "properties": {
     "profileId": {
-      "type": "string"
+      "type": "string",
+      "description": "Logical identifier for this neurorights profile."
     },
     "version": {
-      "type": "string"
+      "type": "string",
+      "description": "Semantic version string, e.g., 1.0.0."
     },
 
     "noNeuralInputsForGovernance": {
       "type": "boolean",
+      "description": "If true, neural signals may not be used as inputs to governance, access control, or sanctions.",
       "default": true
     },
+
     "rights.noscorefrominnerstate": {
       "type": "boolean",
+      "description": "If true, no risk/compliance/eligibility score may be derived from inner-domain content (thoughts, beliefs, affect).",
       "default": true
     },
 
     "noRemoteControlOverBioState": {
       "type": "boolean",
-      "description": "If true, no admissible module may alter BioState/BCI/RoH/FEAR/PAIN using remote or off-host inputs.",
+      "description": "If true, BioState/BCI/RoH/FEAR/PAIN may only be altered by host-local, DID-bound kernels, never by remote or off-chain inputs.",
       "default": true
     },
 
     "disallowedCapabilities": {
       "type": "array",
+      "description": "Capabilities that are forbidden under this profile.",
       "items": { "type": "string" },
       "default": [
         "remote_biostate_control",
@@ -38,6 +45,7 @@
       ]
     }
   },
+
   "required": [
     "profileId",
     "version",
@@ -46,6 +54,7 @@
     "noRemoteControlOverBioState",
     "disallowedCapabilities"
   ],
+
   "allOf": [
     {
       "if": {
@@ -54,7 +63,7 @@
         }
       },
       "then": {
-        "description": "Profiles with noRemoteControlOverBioState = true MUST reject modules declaring remote bio-control capabilities."
+        "description": "Profiles with noRemoteControlOverBioState = true MUST reject modules declaring remote biophysical control capabilities."
       }
     }
   ]
