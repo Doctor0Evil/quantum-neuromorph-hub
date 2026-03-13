@@ -1,8 +1,7 @@
 [workspace]
 members = [
-    "crates/core-contract",
+    "crates/acs-account",
+  "crates/core-contract",
     "crates/orchestration",
     "crates/cli-agent",
 ]
-
-resolver = "2"
